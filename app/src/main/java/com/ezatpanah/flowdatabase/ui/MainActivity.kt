@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                     DataStatus.Status.SUCCESS -> {
                         it.isEmpty?.let { isEmpty -> showEmpty(isEmpty) }
                         loading.isVisible(false, rvContacts)
-                        contactsAdapter.setData(it.data)
+                        contactsAdapter.differ.submitList(it.data)
                         rvContacts.apply {
                             layoutManager = LinearLayoutManager(this@MainActivity)
                             adapter = contactsAdapter
@@ -97,8 +97,8 @@ class MainActivity : AppCompatActivity() {
             val swipeToDeleteCallback = object : SwipeToDelete(this@MainActivity) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val pos = viewHolder.adapterPosition
-                    val contact = contactsAdapter.set//differ.currentList[pos]
-                    viewModel.deleteTodo(contact)
+                    val contact = contactsAdapter.differ.currentList[pos]
+                    viewModel.deleteContact(contact)
                     Snackbar.make(binding.root, "Item Deleted!", Snackbar.LENGTH_LONG).apply {
                         setAction("UNDO") {
                             viewModel.saveContact(contact)
