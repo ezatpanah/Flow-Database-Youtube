@@ -6,9 +6,14 @@ import javax.inject.Inject
 
 class DatabaseRepository @Inject constructor(private val dao: ContactsDao) {
 
-    suspend fun saveNote(entity : ContactsEntity)=dao.saveNote(entity)
-    suspend fun deleteNote(entity : ContactsEntity)=dao.deleteNote(entity)
-    fun getAllNotes()=dao.getAllNotes()
+    suspend fun saveContact(entity : ContactsEntity)=dao.saveContact(entity)
+    suspend fun deleteContact(entity : ContactsEntity)=dao.deleteContact(entity)
+    fun getAllContacts()=dao.getAllContacts()
+    fun deleteAllContacts()=dao.deleteAllContacts()
+    fun getSortedListASC()=dao.sortedASC()
+    fun getSortedListDESC()=dao.sortedDESC()
+    fun searchContact(name: String) = dao.searchContact(name)
+
 
 
 }

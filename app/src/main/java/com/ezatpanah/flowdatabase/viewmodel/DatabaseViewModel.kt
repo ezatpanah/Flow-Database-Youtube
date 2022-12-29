@@ -7,9 +7,7 @@ import com.ezatpanah.flowdatabase.db.ContactsEntity
 import com.ezatpanah.flowdatabase.repository.DatabaseRepository
 import com.ezatpanah.flowdatabase.utils.DataStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,19 +15,46 @@ import javax.inject.Inject
 class DatabaseViewModel  @Inject constructor(private val repository: DatabaseRepository) : ViewModel() {
     val contactsList = MutableLiveData<DataStatus<List<ContactsEntity>>>()
 
-    fun saveNote(noteModel: ContactsEntity) =viewModelScope.launch {
-        repository.saveNote(noteModel)
+    init{
+        getAllContacts()
     }
 
-    fun deleteNote(noteModel: ContactsEntity) =viewModelScope.launch {
-        repository.deleteNote(noteModel)
+    fun saveContact(entity: ContactsEntity) =viewModelScope.launch {
+        repository.saveContact(entity)
     }
 
-    fun getAllNotes()=viewModelScope.launch {
+    fun deleteContact(entity: ContactsEntity) =viewModelScope.launch {
+        repository.deleteContact(entity)
+    }
+
+    fun deleteAllContacts() = viewModelScope.launch {
+        repository.deleteAllContacts()
+    }
+
+    fun getAllContacts()=viewModelScope.launch {
         contactsList.postValue(DataStatus.loading())
-        repository.getAllNotes()
-            .onEach { delay(2000) }
+        repository.getAllContacts()
             .catch { contactsList.postValue(DataStatus.error(it.message.toString())) }
-            .collect{ contactsList.postValue(DataStatus.success(it))}
+            .collect{ contactsList.postValue(DataStatus.success(it,it.isEmpty()))}
+    }
+
+    fun getSortedListASC()=viewModelScope.launch {
+        contactsList.postValue(DataStatus.loading())
+        repository.getSortedListASC()
+            .catch { contactsList.postValue(DataStatus.error(it.message.toString())) }
+            .collect{ contactsList.postValue(DataStatus.success(it,it.isEmpty()))}
+    }
+
+    fun getSortedListDESC()=viewModelScope.launch {
+        contactsList.postValue(DataStatus.loading())
+        repository.getSortedListDESC()
+            .catch { contactsList.postValue(DataStatus.error(it.message.toString())) }
+            .collect{ contactsList.postValue(DataStatus.success(it,it.isEmpty()))}
+    }
+
+    fun getSearchContacts(name: String) = viewModelScope.launch {
+        repository.searchContact(name).collect() {
+            contactsList.postValue(DataStatus.success(it, it.isEmpty()))
+        }
     }
 }

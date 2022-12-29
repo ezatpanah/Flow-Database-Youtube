@@ -15,7 +15,7 @@ import javax.inject.Singleton
 class ContactsAdapter @Inject constructor() : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemContactsBinding
-    private var notesList = emptyList<ContactsEntity>()
+    private var contactsList = emptyList<ContactsEntity>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         binding = ItemContactsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -23,31 +23,31 @@ class ContactsAdapter @Inject constructor() : RecyclerView.Adapter<ContactsAdapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.setData(notesList[position])
+        holder.setData(contactsList[position])
     }
 
     override fun getItemCount(): Int {
-        return notesList.size
+        return contactsList.size
     }
 
     inner class ViewHolder : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun setData(item: ContactsEntity) {
             binding.apply {
-                tvName.text = "${item.id} : ${item.name}"
+                tvName.text = item.name
                 tvPhone.text = item.phone
             }
         }
     }
 
     fun setData(data: List<ContactsEntity>?) {
-        val moviesDiffUtil = NotesDiffUtils(notesList, data!!)
-        val diffUtils = DiffUtil.calculateDiff(moviesDiffUtil)
-        notesList = data
+        val contactsDiffUtil = ContactsDiffUtils(contactsList, data!!)
+        val diffUtils = DiffUtil.calculateDiff(contactsDiffUtil)
+        contactsList = data
         diffUtils.dispatchUpdatesTo(this)
     }
 
-    class NotesDiffUtils(
+    class ContactsDiffUtils(
         private val oldItem: List<ContactsEntity>,
         private val newItem: List<ContactsEntity>
     ) : DiffUtil.Callback() {
