@@ -1,5 +1,7 @@
 package com.ezatpanah.flowdatabase.ui
 
+import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -16,13 +18,15 @@ import com.ezatpanah.flowdatabase.adapter.ContactsAdapter
 import com.ezatpanah.flowdatabase.databinding.ActivityMainBinding
 import com.ezatpanah.flowdatabase.ui.add.AddContactFragment
 import com.ezatpanah.flowdatabase.ui.deleteall.DeleteAllFragment
+import com.ezatpanah.flowdatabase.utils.Constants.BUNDLE_ID
 import com.ezatpanah.flowdatabase.utils.DataStatus
-import com.ezatpanah.flowdatabase.utils.SwipeToDelete
 import com.ezatpanah.flowdatabase.utils.isVisible
 import com.ezatpanah.flowdatabase.viewmodel.DatabaseViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -31,9 +35,6 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var contactsAdapter: ContactsAdapter
-
-//    @Inject
-//    lateinit var entity: ContactsEntity
 
     private val viewModel: DatabaseViewModel by viewModels()
 
@@ -94,20 +95,61 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            val swipeToDeleteCallback = object : SwipeToDelete(this@MainActivity) {
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val pos = viewHolder.adapterPosition
-                    val contact = contactsAdapter.differ.currentList[pos]
-                    viewModel.deleteContact(contact)
-                    Snackbar.make(binding.root, "Item Deleted!", Snackbar.LENGTH_LONG).apply {
-                        setAction("UNDO") {
-                            viewModel.saveContact(contact)
-                        }
-                    }.show()
-
+            val swipeCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+                override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                    return false
                 }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val position = viewHolder.adapterPosition
+                    val contact = contactsAdapter.differ.currentList[position]
+                    when (direction) {
+                        ItemTouchHelper.LEFT -> {
+                            viewModel.deleteContact(contact)
+                            Snackbar.make(binding.root, "Item Deleted!", Snackbar.LENGTH_LONG).apply {
+                                setAction("UNDO") {
+                                    viewModel.saveContact(false, contact)
+                                }
+                            }.show()
+                        }
+                        ItemTouchHelper.RIGHT -> {
+                            val addContactFragment = AddContactFragment()
+                            val bundle = Bundle()
+                            bundle.putInt(BUNDLE_ID, contact.id)
+                            addContactFragment.arguments = bundle
+                            addContactFragment.show(supportFragmentManager, AddContactFragment().tag)
+                        }
+                    }
+                }
+
+                override fun onChildDraw(
+                    c: Canvas,
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    dX: Float,
+                    dY: Float,
+                    actionState: Int,
+                    isCurrentlyActive: Boolean
+                ) {
+                    RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                        .addSwipeLeftLabel("Delete")
+                        .addSwipeLeftBackgroundColor(Color.RED)
+                        .addSwipeLeftActionIcon(R.drawable.ic_baseline_delete_24)
+                        .setSwipeLeftLabelColor(Color.WHITE)
+                        .setSwipeLeftActionIconTint(Color.WHITE)
+                        .addSwipeRightLabel("Edit")
+                        .addSwipeRightBackgroundColor(Color.GREEN)
+                        .setSwipeRightLabelColor(Color.WHITE)
+                        .setSwipeRightActionIconTint(Color.WHITE)
+                        .addSwipeRightActionIcon(R.drawable.ic_baseline_edit_24)
+                        .create()
+                        .decorate()
+                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                }
+
             }
-            val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+
+            val itemTouchHelper = ItemTouchHelper(swipeCallback)
             itemTouchHelper.attachToRecyclerView(rvContacts)
 
         }

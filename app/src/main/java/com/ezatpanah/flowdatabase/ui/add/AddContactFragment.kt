@@ -10,6 +10,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.ezatpanah.flowdatabase.databinding.FragmentAddContactBinding
 import com.ezatpanah.flowdatabase.db.ContactsEntity
+import com.ezatpanah.flowdatabase.utils.Constants.BUNDLE_ID
+import com.ezatpanah.flowdatabase.utils.Constants.EDIT
+import com.ezatpanah.flowdatabase.utils.Constants.NEW
 import com.ezatpanah.flowdatabase.viewmodel.DatabaseViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +28,7 @@ class AddContactFragment : DialogFragment() {
 
     private lateinit var binding: FragmentAddContactBinding
 
-    private var ContactId = 0
+    private var contactId = 0
     private var name = ""
     private var phone = ""
 
@@ -43,9 +46,31 @@ class AddContactFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        contactId = arguments?.getInt(BUNDLE_ID) ?: 0
+
+        if (contactId > 0) {
+            type = EDIT
+            isEdit = true
+        } else {
+            isEdit = false
+            type = NEW
+        }
+
+
         binding.apply {
             imgClose.setOnClickListener {
                 dismiss()
+            }
+
+            if (type == EDIT) {
+                viewModel.getDetailsContact(contactId)
+                viewModel.contactsDetail.observe(viewLifecycleOwner) { itData ->
+                    itData.data?.let {
+                        edtName.setText(it.name)
+                        edtPhone.setText(it.phone)
+                    }
+                }
             }
 
             btnSave.setOnClickListener {
@@ -57,11 +82,11 @@ class AddContactFragment : DialogFragment() {
                     Snackbar.make(it,"Name and Phone cannot be Empty!",Snackbar.LENGTH_SHORT).show()
                 } else {
 
-                    entity.id = ContactId
+                    entity.id = contactId
                     entity.name = name
                     entity.phone = phone
 
-                    viewModel.saveContact(entity)
+                    viewModel.saveContact(isEdit,entity)
 
                     edtName.setText("")
                     edtPhone.setText("")

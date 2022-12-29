@@ -9,8 +9,14 @@ interface  ContactsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveContact(contactsEntity: ContactsEntity)
 
+    @Update
+    suspend fun updateContact(contactsEntity: ContactsEntity)
+
     @Delete
     suspend fun deleteContact(contactsEntity: ContactsEntity)
+
+    @Query("SELECT * FROM $CONTACTS_TABLE WHERE id ==:id")
+    fun getContact(id: Int): Flow<ContactsEntity>
 
     @Query("SELECT * FROM $CONTACTS_TABLE")
     fun getAllContacts(): Flow<MutableList<ContactsEntity>>
