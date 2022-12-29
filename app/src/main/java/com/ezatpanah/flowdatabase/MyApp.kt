@@ -1,4 +1,4 @@
-package com.ezatpanah
+package com.ezatpanah.flowdatabase
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
