@@ -17,5 +17,4 @@ class DatabaseRepository @Inject constructor(private val dao: ContactsDao) {
     fun searchContact(name: String) = dao.searchContact(name)
 
 
-
 }

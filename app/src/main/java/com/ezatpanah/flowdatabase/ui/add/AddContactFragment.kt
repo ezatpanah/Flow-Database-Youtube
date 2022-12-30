@@ -79,14 +79,14 @@ class AddContactFragment : DialogFragment() {
                 phone = edtPhone.text.toString()
 
                 if (name.isEmpty() || phone.isEmpty()) {
-                    Snackbar.make(it,"Name and Phone cannot be Empty!",Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(it, "Name and Phone cannot be Empty!", Snackbar.LENGTH_SHORT).show()
                 } else {
 
                     entity.id = contactId
                     entity.name = name
                     entity.phone = phone
 
-                    viewModel.saveContact(isEdit,entity)
+                    viewModel.saveContact(isEdit, entity)
 
                     edtName.setText("")
                     edtPhone.setText("")

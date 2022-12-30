@@ -8,15 +8,14 @@
     android:padding="15dp"
     tools:context=".ui.add.AddContactFragment">
 
-
     <ImageView
         android:id="@+id/imgClose"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/ic_baseline_clear_24"
+        app:layout_constraintBottom_toTopOf="@id/tvTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tvTitle"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -27,10 +26,10 @@
         android:text="Add your contact infomation"
         android:textColor="#575757"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/edtName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgClose"
-        app:layout_constraintBottom_toTopOf="@id/edtName" />
+        app:layout_constraintTop_toBottomOf="@id/imgClose" />
 
     <EditText
         android:id="@+id/edtName"

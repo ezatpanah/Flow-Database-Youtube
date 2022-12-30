@@ -12,9 +12,8 @@
         android:id="@+id/actionSort"
         android:icon="@drawable/ic_baseline_sort_24"
         android:title="Sort"
-        app:showAsAction="always"
         app:iconTint="@color/white"
-        />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/actionDeleteAll"

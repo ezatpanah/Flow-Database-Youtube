@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
 
             viewModel.getAllContacts()
             viewModel.contactsList.observe(this@MainActivity) {
-
                 when (it.status) {
                     DataStatus.Status.LOADING -> {
                         loading.isVisible(true, rvContacts)
@@ -75,7 +74,6 @@ class MainActivity : AppCompatActivity() {
                         loading.isVisible(false, rvContacts)
                         Toast.makeText(this@MainActivity, it.message, Toast.LENGTH_SHORT).show()
                     }
-
                 }
             }
 
@@ -169,8 +167,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun filter() {
         val builder = AlertDialog.Builder(this)
-        val priories = arrayOf("Newer(Default)", "Name : A-Z", "Name Z-A")
-        builder.setSingleChoiceItems(priories, selectedItem) { dialog, item ->
+        val sortItems = arrayOf("Newer(Default)", "Name : A-Z", "Name Z-A")
+        builder.setSingleChoiceItems(sortItems, selectedItem) { dialog, item ->
             when (item) {
                 0 -> {
                     viewModel.getAllContacts()
@@ -188,7 +186,6 @@ class MainActivity : AppCompatActivity() {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
