@@ -12,7 +12,16 @@ Screen-Shot :
 <img alt="Ezatpanah GithubClient-MVP" src="screenshot/6.png" width="20%">
 <img alt="Ezatpanah GithubClient-MVP" src="screenshot/Screenshot_1673083989.png" width="20%">
 <img alt="Ezatpanah GithubClient-MVP" src="screenshot/Screenshot_1673083996.png" width="20%">
+<br>
+<br>
+Technologies and Libraries Used :
+* Coroutines
+* Dagger Hilt
+* View Binding
+* Live Data
+* RecyclerView Decorator
 
+<br>
 YouTube Video 
 <br> 
 <br>  
