@@ -19,7 +19,9 @@ class DatabaseViewModel @Inject constructor(private val repository: DatabaseRepo
     val contactsList : LiveData<DataStatus<List<ContactsEntity>>>
         get() = _contactsList
 
-    val contactsDetail = MutableLiveData<DataStatus<ContactsEntity>>()
+    private val _contactDetails = MutableLiveData<DataStatus<ContactsEntity>>()
+    val contactDetails :LiveData<DataStatus<ContactsEntity>>
+        get() = _contactDetails
 
     init {
         getAllContacts()
@@ -70,7 +72,7 @@ class DatabaseViewModel @Inject constructor(private val repository: DatabaseRepo
 
     fun getDetailsContact(id: Int) = viewModelScope.launch {
         repository.getDetailsContact(id).collect {
-            contactsDetail.postValue(DataStatus.success(it, false))
+            _contactDetails.postValue(DataStatus.success(it, false))
         }
     }
 

@@ -65,7 +65,7 @@ class AddContactFragment : DialogFragment() {
 
             if (type == EDIT) {
                 viewModel.getDetailsContact(contactId)
-                viewModel.contactsDetail.observe(viewLifecycleOwner) { itData ->
+                viewModel.contactDetails.observe(viewLifecycleOwner) { itData ->
                     itData.data?.let {
                         edtName.setText(it.name)
                         edtPhone.setText(it.phone)
