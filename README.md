@@ -2,6 +2,20 @@
 
 <img alt="Ezatpanah  Flow-Database-Youtube" src="https://emojipedia-us.s3.amazonaws.com/content/2020/04/05/yt.png" width="3%"></a>
 
+Technologies and Libraries Used :
+* Clean Articuture (MVVM)
+* Coroutines
+* Flow
+* Room Database
+* Dagger Hilt
+* View Binding
+* Live Data
+* RecyclerView Decorator
+* DataStatus
+* RecyclerView Swipe
+
+
+
 Screen-Shot :
 <br>
 <img alt="Ezatpanah Flow-Database-Youtube" src="screenshot/1.png" width="20%">
@@ -14,19 +28,15 @@ Screen-Shot :
 <img alt="Ezatpanah Flow-Database-Youtube" src="screenshot/Screenshot_1673083996.png" width="20%">
 <br>
 <br>
-Technologies and Libraries Used :
-* Coroutines
-* Flow
-* Room Database
-* Dagger Hilt
-* View Binding
-* Live Data
-* RecyclerView Decorator
+
+
 
 <br>
 YouTube Video 
 <br> 
-<br>  
+<img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover1.jpg" width="20%">
+<br> 
+<img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover2.jpg" width="20%">
 <br>
 
 
