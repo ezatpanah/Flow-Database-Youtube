@@ -14,6 +14,18 @@ Technologies and Libraries Used :
 * DataStatus
 * RecyclerView Swipe
 
+<br>
+YouTube Video 
+<br> 
+Part 1 :
+<br> 
+<img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover1.jpg" width="60%">
+<br> 
+Part 2 :
+<br> 
+<img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover2.jpg" width="60%">
+<br>
+
 
 
 Screen-Shot :
@@ -31,13 +43,6 @@ Screen-Shot :
 
 
 
-<br>
-YouTube Video 
-<br> 
-<img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover1.jpg" width="20%">
-<br> 
-<img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover2.jpg" width="20%">
-<br>
 
 
 
