@@ -10,7 +10,6 @@ Technologies and Libraries Used :
 * Dagger Hilt
 * View Binding
 * Live Data
-* RecyclerView Decorator
 * DataStatus
 * RecyclerView Swipe
 * Dialog Fragment
