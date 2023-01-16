@@ -20,11 +20,11 @@ YouTube Video
 <br> 
 Part 1 :
 <br> 
-<img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover1.jpg" width="60%">
+<a href="https://www.youtube.com/watch?v=pYnL3yXYhQY" target="_blank"><img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover1.jpg" width="60%"></a>
 <br> 
 Part 2 :
 <br> 
-<img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover2.jpg" width="60%">
+<a href="" target="_blank"><img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover2.jpg" width="60%"></a>
 <br>
 
 
