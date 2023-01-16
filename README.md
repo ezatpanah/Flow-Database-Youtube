@@ -13,6 +13,7 @@ Technologies and Libraries Used :
 * RecyclerView Decorator
 * DataStatus
 * RecyclerView Swipe
+* Dialog Fragment
 
 <br>
 YouTube Video 
