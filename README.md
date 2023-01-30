@@ -23,11 +23,11 @@ Part 1 :
 <br> 
 Part 2 :
 <br> 
-<a href="" target="_blank"><img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover2.jpg" width="60%"></a>
+<a href="https://www.youtube.com/watch?v=-lC5pjFUg8Y" target="_blank"><img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover2.jpg" width="60%"></a>
 <br>
 Part 3 :
 <br> 
-<a href="" target="_blank"><img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover3.jpg" width="60%"></a>
+<a href="https://youtu.be/4bCRLXAIaOU" target="_blank"><img alt="Ezatpanah Flow-Database-Youtube" src="flow-database-Cover3.jpg" width="60%"></a>
 <br>
 Part 4 :
 <br> 
