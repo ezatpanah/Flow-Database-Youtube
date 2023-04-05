@@ -10,7 +10,7 @@
 * Room Database
 * Dagger Hilt
 * View Binding
-* Live Data
+* LiveData
 * DataStatus
 * RecyclerView Swipe
 * Dialog Fragment
